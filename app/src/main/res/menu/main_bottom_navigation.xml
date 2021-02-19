@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bnv_home"
+        android:icon="@drawable/ic_home_normal"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/bnv_girl"
+        android:icon="@drawable/ic_girl_normal"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="@string/girl"/>
+    <item
+        android:id="@+id/bnv_about"
+        android:icon="@drawable/ic_about_normal"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="@string/about"/>
+
+</menu>
