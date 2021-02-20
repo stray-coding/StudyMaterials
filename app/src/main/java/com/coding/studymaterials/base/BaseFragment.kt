@@ -5,8 +5,6 @@ package com.coding.studymaterials.base
  * @date: 2020/7/3
  * @emil: 229101253@qq.com
  * @des:
- *
- *
  */
 
 import android.content.Context
@@ -26,6 +24,7 @@ abstract class BaseFragment : Fragment() {
     private var mRootView: View? = null
     protected val TAG = this.javaClass.simpleName
     protected lateinit var ctx: Context
+    private var isFirstLoad = true
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -45,57 +44,20 @@ abstract class BaseFragment : Fragment() {
     ): View {
         Log.w(TAG, "onCreateView()")
         if (mRootView == null) {
-            //mRootView = LayoutInflater.from(ctx).inflate(bindLayout(), null)
             mRootView = bindView()
         }
 
         return mRootView!!
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        Log.w(TAG, "onActivityCreated()")
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initData(savedInstanceState)
-        initListener()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.w(TAG, "onStart()")
-    }
-
     override fun onResume() {
         super.onResume()
         Log.w(TAG, "onResume()")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.w(TAG, "onPause()")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.w(TAG, "onStop()")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.w(TAG, "onDestroyView()")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.w(TAG, "onDestroy()")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.w(TAG, "onDetach()")
+        if (isFirstLoad) {
+            isFirstLoad = false
+            lazyLoadData()
+            lazyLoadListener()
+        }
     }
 
     protected fun showTip(msg: String) {
@@ -103,6 +65,6 @@ abstract class BaseFragment : Fragment() {
     }
 
     abstract fun bindView(): View
-    abstract fun initData(savedInstanceState: Bundle?)
-    abstract fun initListener()
+    abstract fun lazyLoadData()
+    abstract fun lazyLoadListener()
 }

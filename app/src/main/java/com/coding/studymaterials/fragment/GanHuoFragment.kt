@@ -1,12 +1,11 @@
 package com.coding.studymaterials.fragment
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.coding.studymaterials.base.BaseFragment
-import com.coding.studymaterials.databinding.FragmentArticleBinding
+import com.coding.studymaterials.databinding.FragmentGanhuoBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -15,16 +14,18 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @emil: 229101253@qq.com
  * @des:
  */
-class ArticleFragment : BaseFragment() {
+class GanHuoFragment : BaseFragment() {
 
-    private lateinit var viewBinding: FragmentArticleBinding
-    private val tabs = arrayListOf("Android", "IOS", "Flutter", "前端", "后端", "APP")
+    private lateinit var viewBinding: FragmentGanhuoBinding
+    private val tabs = arrayListOf("Android", "iOS", "Flutter", "前端", "后端", "APP")
+    private val types = arrayListOf("Android", "iOS", "Flutter", "frontend", "backend", "app")
     override fun bindView(): View {
-        viewBinding = FragmentArticleBinding.inflate(layoutInflater)
+        viewBinding = FragmentGanhuoBinding.inflate(layoutInflater)
         return viewBinding.root
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun lazyLoadData() {
+        viewBinding.viewpager2.offscreenPageLimit = tabs.size
         viewBinding.viewpager2.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
         viewBinding.viewpager2.adapter = object : FragmentStateAdapter(
             childFragmentManager,
@@ -35,18 +36,16 @@ class ArticleFragment : BaseFragment() {
             }
 
             override fun createFragment(position: Int): Fragment {
-                return PaperFragment.newInstance(tabs[position])
+                return PaperFragment.newInstance(types[position])
             }
 
         }
-
 
         val mediator = TabLayoutMediator(
             viewBinding.tabBar, viewBinding.viewpager2
         ) { tab, position ->
             tab.text = tabs[position]
         }.attach()
-
 
     }
 
@@ -58,7 +57,7 @@ class ArticleFragment : BaseFragment() {
         }
     }
 
-    override fun initListener() {
+    override fun lazyLoadListener() {
         viewBinding.viewpager2.registerOnPageChangeCallback(pageChangeCallback)
     }
 

@@ -2,7 +2,6 @@ package com.coding.studymaterials.fragment
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +22,7 @@ class AboutFragment : BaseFragment() {
         "mail：stray-coding@foxmail.com",
         "GitHub：https://github.com/stray-coding/StudyMaterials"
     )
-    private lateinit var mAdapter: AboutAdapter
+    private lateinit var adapter: AboutAdapter
     private lateinit var viewBinding: FragmentAboutBinding
 
     override fun bindView(): View {
@@ -31,18 +30,18 @@ class AboutFragment : BaseFragment() {
         return viewBinding.root
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun lazyLoadData() {
         viewBinding.rvAbout.layoutManager =
             LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        mAdapter = AboutAdapter(ctx, lists)
+        adapter = AboutAdapter(ctx, lists)
         viewBinding.rvAbout.addItemDecoration(
             RecycleViewDivider(activity, RecyclerView.HORIZONTAL)
         )
-        viewBinding.rvAbout.adapter = mAdapter
+        viewBinding.rvAbout.adapter = adapter
     }
 
-    override fun initListener() {
-        mAdapter.setOnItemClickListener { _, pos ->
+    override fun lazyLoadListener() {
+        adapter.setOnItemClickListener { _, pos ->
             when (pos) {
                 2 -> {
                     val urlIntent = Intent(

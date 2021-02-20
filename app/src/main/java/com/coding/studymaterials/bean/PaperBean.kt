@@ -6,7 +6,7 @@ package com.coding.studymaterials.bean
  * @emil: 229101253@qq.com
  * @des:
  */
-data class PageGirlBean(
+data class PaperBean(
     /*请求页数*/
     var page: Int = 0,
     /*总页数*/
@@ -37,14 +37,14 @@ data class PageGirlBean(
         var category: String = "",
         var createdAt: String = "",
         var desc: String = "",
+        var images: List<String> = arrayListOf(),
         var likeCounts: Int = 0,
         var publishedAt: String = "",
         var stars: Int = 0,
         var title: String = "",
         var type: String = "",
         var url: String = "",
-        var views: Int = 0,
-        var images: List<String> = arrayListOf()
+        var views: Int = 0
     )
 
 }

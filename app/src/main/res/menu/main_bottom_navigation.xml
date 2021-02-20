@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bnv_home"
-        android:icon="@drawable/ic_home_normal"
+        android:id="@+id/bnv_ganhuo"
+        android:icon="@drawable/ic_article"
         android:enabled="true"
         app:showAsAction="ifRoom"
         android:title="@string/article" />
     <item
         android:id="@+id/bnv_girl"
-        android:icon="@drawable/ic_girl_normal"
+        android:icon="@drawable/ic_girl"
         android:enabled="true"
         app:showAsAction="ifRoom"
         android:title="@string/girl"/>
     <item
         android:id="@+id/bnv_about"
-        android:icon="@drawable/ic_about_normal"
+        android:icon="@drawable/ic_about"
         android:enabled="true"
         app:showAsAction="ifRoom"
         android:title="@string/about"/>

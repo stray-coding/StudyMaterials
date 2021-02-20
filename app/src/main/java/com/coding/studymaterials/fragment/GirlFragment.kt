@@ -10,7 +10,7 @@ import com.coding.studymaterials.activity.BigPicActivity
 import com.coding.studymaterials.adapter.GirlAdapter
 import com.coding.studymaterials.base.BaseFragment
 import com.coding.studymaterials.base.LoadMoreOnScrollListener
-import com.coding.studymaterials.bean.PageGirlBean
+import com.coding.studymaterials.bean.PaperBean
 import com.coding.studymaterials.databinding.FragmentGirlBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,43 +31,43 @@ class GirlFragment : BaseFragment() {
     private lateinit var viewBinding: FragmentGirlBinding
 
     /*获取Girl图片URL的相关参数*/
-    private val mCategory = "Girl"
-    private val mType = "Girl"
-    private val mCount = 10
-    private var mPage = 1
+    private val category = "Girl"
+    private val type = "Girl"
+    private val count = 10
+    private var page = 1
 
-    private val mDataList: ArrayList<PageGirlBean.DataBean> = arrayListOf()
-    private lateinit var mAdapter: GirlAdapter
+    private val dataList: ArrayList<PaperBean.DataBean> = arrayListOf()
+    private lateinit var adapter: GirlAdapter
 
     override fun bindView(): View {
         viewBinding = FragmentGirlBinding.inflate(layoutInflater)
         return viewBinding.root
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    override fun lazyLoadData() {
         viewBinding.srlRefresh.isRefreshing = true
         loadPic(true)
         val spanCount = 2
         viewBinding.rvGirl.layoutManager =
             StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
-        mAdapter = GirlAdapter(ctx, mDataList)
-        viewBinding.rvGirl.adapter = mAdapter
+        adapter = GirlAdapter(ctx, dataList)
+        viewBinding.rvGirl.adapter = adapter
         viewBinding.srlRefresh.setColorSchemeResources(R.color.black, R.color.green, R.color.blue)
     }
 
-    override fun initListener() {
+    override fun lazyLoadListener() {
         viewBinding.srlRefresh.setOnRefreshListener {
             Log.i(TAG, "重新加载图片")
             loadPic(true)
         }
-        mAdapter.setOnItemClickListener { _, pos ->
+        adapter.setOnItemClickListener { _, pos ->
             val intent = Intent(activity, BigPicActivity::class.java)
             val bundle = Bundle()
-            bundle.putString("name", mAdapter.getItemData(pos)._id)
-            bundle.putString("title", mAdapter.getItemData(pos).title)
-            bundle.putString("desc", mAdapter.getItemData(pos).desc)
-            bundle.putString("time", mAdapter.getItemData(pos).publishedAt)
-            bundle.putString("url", mAdapter.getItemData(pos).url)
+            bundle.putString("name", adapter.getItemData(pos)._id)
+            bundle.putString("title", adapter.getItemData(pos).title)
+            bundle.putString("desc", adapter.getItemData(pos).desc)
+            bundle.putString("time", adapter.getItemData(pos).publishedAt)
+            bundle.putString("url", adapter.getItemData(pos).url)
             intent.putExtras(bundle)
             activity?.startActivity(intent)
         }
@@ -96,34 +96,34 @@ class GirlFragment : BaseFragment() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val request = retrofit.create(GetOnePic::class.java)
-            if (isRefresh) mPage = 1 else mPage++
-            val url = getRequestUrl(mCategory, mType, mPage, mCount)
+            if (isRefresh) page = 1 else page++
+            val url = getRequestUrl(category, type, page, count)
             val call = request.getCall(url)
-            call.enqueue(object : Callback<PageGirlBean> {
+            call.enqueue(object : Callback<PaperBean> {
                 override fun onResponse(
-                    call: Call<PageGirlBean>,
-                    response: Response<PageGirlBean>
+                    call: Call<PaperBean>,
+                    response: Response<PaperBean>
                 ) {
                     Log.i(TAG, "response: {$response}")
                     Log.i(TAG, "response.body(): {${response.body()}}")
-                    val body = response.body() as PageGirlBean
+                    val body = response.body() as PaperBean
                     if (isRefresh) {
-                        mDataList.clear()
+                        dataList.clear()
                     }
                     for (item in body.data) {
-                        if (!mDataList.contains(item)) {
+                        if (!dataList.contains(item)) {
                             Log.i(TAG, "图片添加至list:{${item._id}}")
-                            mDataList.add(item)
+                            dataList.add(item)
                         } else {
                             Log.i(TAG, "数据中已含有该图片:{${item._id}}")
                         }
                     }
-                    mAdapter.notifyDataSetChanged()
+                    adapter.notifyDataSetChanged()
                     viewBinding.srlRefresh.isRefreshing = false
                     isLoadingData = false
                 }
 
-                override fun onFailure(call: Call<PageGirlBean>, t: Throwable) {
+                override fun onFailure(call: Call<PaperBean>, t: Throwable) {
                     Log.e(TAG, "onFailure$t")
                     showTip("数据加载失败")
                     viewBinding.srlRefresh.isRefreshing = false
@@ -140,7 +140,7 @@ class GirlFragment : BaseFragment() {
 
     interface GetOnePic {
         @GET
-        fun getCall(@Url url: String): Call<PageGirlBean>
+        fun getCall(@Url url: String): Call<PaperBean>
     }
 
     private fun getRequestUrl(category: String, type: String, page: Int, count: Int): String {

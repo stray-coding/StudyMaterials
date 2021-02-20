@@ -1,10 +1,6 @@
 package com.coding.studymaterials.adapter
 
 import android.content.Context
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.coding.studymaterials.R
 import com.coding.studymaterials.base.BaseRecyclerAdapter
@@ -18,36 +14,14 @@ import com.coding.studymaterials.bean.PaperBean
  * @emil: 229101253@qq.com
  * @des:RecycleView的图片适配器
  */
-class GirlAdapter(context: Context, dataList: List<PaperBean.DataBean>) :
+class PaperAdapter(context: Context, dataList: List<PaperBean.DataBean>) :
     BaseRecyclerAdapter<PaperBean.DataBean>(context, dataList) {
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        when (val manager = recyclerView.layoutManager as RecyclerView.LayoutManager) {
-            is GridLayoutManager -> manager.spanSizeLookup = object : SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return if (isFooter(position)) {
-                        manager.spanCount
-                    } else 1
-                }
-            }
-        }
-    }
-
-    override fun onViewAttachedToWindow(holder: RecyclerViewHolder) {
-        super.onViewAttachedToWindow(holder)
-        if (isFooter(holder.layoutPosition)) {
-            when (val p = holder.itemView.layoutParams) {
-                is StaggeredGridLayoutManager.LayoutParams -> p.isFullSpan = true
-            }
-        }
-    }
 
     override fun getItemLayoutId(viewType: Int): Int {
         return when (viewType) {
-            RecyclerViewType.CONTENT.value -> R.layout.rv_item_girl
+            RecyclerViewType.CONTENT.value -> R.layout.rv_item_paper
             RecyclerViewType.FOOTER.value -> R.layout.foot_load_view
-            else -> R.layout.rv_item_girl
+            else -> R.layout.rv_item_paper
         }
     }
 
@@ -57,7 +31,7 @@ class GirlAdapter(context: Context, dataList: List<PaperBean.DataBean>) :
         item: PaperBean.DataBean
     ) {
         if (getItemViewType(position) == RecyclerViewType.CONTENT.value) {
-            val img = holder.getImageView(R.id.img_girl)
+            val img = holder.getImageView(R.id.img_paper)
             if (item.images.isNotEmpty()) {
                 Glide.with(mContext)
                     .load(item.images[0])
@@ -66,7 +40,9 @@ class GirlAdapter(context: Context, dataList: List<PaperBean.DataBean>) :
                     .centerCrop()
                     .into(img)
             }
-            holder.setText(R.id.tv_msg, item.desc)
+            holder.setText(R.id.tv_paper_title, item.title)
+            holder.setText(R.id.tv_paper_content, item.desc)
+            holder.setText(R.id.tv_paper_author, item.author)
         }
     }
 
