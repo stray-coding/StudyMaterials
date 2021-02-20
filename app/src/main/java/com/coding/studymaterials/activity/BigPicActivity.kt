@@ -1,7 +1,6 @@
-package com.coding.studymaterials.fragment
+package com.coding.studymaterials.activity
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -13,42 +12,38 @@ import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
-import com.coding.girl.base.BaseFragment
-import com.coding.studymaterials.databinding.FragmentBigpicBinding
+import com.coding.studymaterials.base.BaseActivity
+import com.coding.studymaterials.databinding.ActivityBigpicBinding
 import com.coding.studymaterials.util.BitmapUtil
 
-/**
- * @author: Coding.He
- * @date: 2021/2/19
- * @emil: 229101253@qq.com
- * @des:
- */
-class BigPicFragment : BaseFragment() {
+class BigPicActivity : BaseActivity() {
     companion object {
         private const val REQ_PERMISSION = 200
     }
 
-    private lateinit var viewBinding: FragmentBigpicBinding
+    private lateinit var viewBinding: ActivityBigpicBinding
     private lateinit var mBitmap: Bitmap
     private var mPicUrl = ""
     private var mPicName = ""
     private var mDesc = ""
-    override fun bindLayout(): Int {
-        return 0
-    }
 
     override fun bindView(): View {
-        viewBinding = FragmentBigpicBinding.inflate(layoutInflater)
+        viewBinding = ActivityBigpicBinding.inflate(layoutInflater)
         return viewBinding.root
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
-        if (arguments != null) {
-            mPicUrl = arguments!!.getString("url", "")
-            mPicName = arguments!!.getString("name", "")
+
+    override fun initDataBeforeSetContentView(savedInstanceState: Bundle?) {
+
+    }
+
+    override fun initDataAfterSetContentView(savedInstanceState: Bundle?) {
+        if (intent != null && intent.extras != null) {
+            mPicUrl = intent.extras!!.getString("url", "")
+            mPicName = intent.extras!!.getString("name", "")
             if (!mPicName.endsWith(".jpg"))
                 mPicName = "$mPicName.jpg"
-            mDesc = arguments!!.getString("desc", "").replace("\n", "")
+            mDesc = intent.extras!!.getString("desc", "").replace("\n", "")
         }
 
         Glide.with(this)
@@ -58,30 +53,25 @@ class BigPicFragment : BaseFragment() {
         viewBinding.tvDesc.text = mDesc
     }
 
-    override fun initListener() {
+    override fun setListener() {
         viewBinding.imgBack.setOnClickListener {
-            activity!!.supportFragmentManager.popBackStack()
+            finish()
         }
 
-        viewBinding.imgDetails.setOnClickListener {
-            val builder = AlertDialog.Builder(ctx)
-            builder.setNegativeButton("取消", null)
-            builder.setPositiveButton(
-                "保存"
-            ) { dialog, which ->
+        viewBinding.imgDownload.setOnClickListener {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    REQ_PERMISSION
+                )
+            } else {
                 mBitmap = BitmapUtil.drawable2Bitmap(viewBinding.imgDetailGirl.drawable)
-                if (ActivityCompat.checkSelfPermission(
-                        activity!!,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        activity!!,
-                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQ_PERMISSION
-                    )
-                } else {
-                    addBitmapToAlbum(mBitmap, mPicName)
-                }
+                addBitmapToAlbum(mBitmap, mPicName)
             }
         }
     }
@@ -99,12 +89,12 @@ class BigPicFragment : BaseFragment() {
                     "${Environment.getExternalStorageDirectory().path}/${Environment.DIRECTORY_DCIM}/$displayName"
                 )
             }
-            val uri = activity!!.contentResolver.insert(
+            val uri = contentResolver.insert(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 values
             )
             if (uri != null) {
-                val outputStream = activity!!.contentResolver.openOutputStream(uri)
+                val outputStream = contentResolver.openOutputStream(uri)
                 if (outputStream != null) {
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
                     outputStream.close()

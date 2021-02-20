@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -19,8 +18,7 @@ import com.coding.studymaterials.util.StatusBarUtils
 /**
  * Created by HDL on 2018/1/15.
  */
-abstract class BaseActivity : AppCompatActivity(){
-
+abstract class BaseActivity : AppCompatActivity() {
     protected val TAG: String = javaClass.name
 
     /**
@@ -47,8 +45,8 @@ abstract class BaseActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         Log.d(TAG, "BaseActivity-->onCreate()")
-        if (mContextView == null) mContextView =
-            LayoutInflater.from(this).inflate(bindLayout(), null)
+        if (mContextView == null) mContextView = bindView()
+        //LayoutInflater.from(this).inflate(bindLayout(), null)
         initDataBeforeSetContentView(savedInstanceState)
         if (mAllowFullScreen) {
             //隐藏action bar
@@ -82,7 +80,7 @@ abstract class BaseActivity : AppCompatActivity(){
      *
      * @return
      */
-    abstract fun bindLayout(): Int
+    abstract fun bindView(): View
 
     /**
      * [加载数据]

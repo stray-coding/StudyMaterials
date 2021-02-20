@@ -22,7 +22,7 @@ class AboutFragment : BaseFragment() {
     private val lists = listOf(
         "author：stray-coding",
         "mail：stray-coding@foxmail.com",
-        "GitHub：https://github.com/stray-coding/About"
+        "GitHub：https://github.com/stray-coding/StudyMaterials"
     )
     private lateinit var mAdapter: AboutAdapter
     private lateinit var viewBinding: FragmentAboutBinding
@@ -36,7 +36,6 @@ class AboutFragment : BaseFragment() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
         viewBinding.rvAbout.layoutManager =
             LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         mAdapter = AboutAdapter(ctx, lists)
@@ -52,7 +51,7 @@ class AboutFragment : BaseFragment() {
                 2 -> {
                     val urlIntent = Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("https://github.com/stray-coding/Girl")
+                        Uri.parse("https://github.com/stray-coding/StudyMaterials")
                     )
                     startActivity(urlIntent)
                 }

@@ -1,14 +1,15 @@
 package com.coding.studymaterials.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.coding.girl.adapter.GirlAdapter
 import com.coding.girl.base.BaseFragment
 import com.coding.girl.base.LoadMoreOnScrollListener
 import com.coding.studymaterials.R
+import com.coding.studymaterials.activity.BigPicActivity
 import com.coding.studymaterials.bean.PageGirlBean
 import com.coding.studymaterials.databinding.FragmentGirlBinding
 import retrofit2.Call
@@ -64,13 +65,15 @@ class GirlFragment : BaseFragment() {
             loadPic(true)
         }
         mAdapter.setOnItemClickListener { _, pos ->
+            val intent = Intent(activity, BigPicActivity::class.java)
             val bundle = Bundle()
             bundle.putString("name", mAdapter.getItemData(pos)._id)
             bundle.putString("title", mAdapter.getItemData(pos).title)
             bundle.putString("desc", mAdapter.getItemData(pos).desc)
             bundle.putString("time", mAdapter.getItemData(pos).publishedAt)
             bundle.putString("url", mAdapter.getItemData(pos).url)
-            findNavController(viewBinding.rvGirl).navigate(R.id.action_mainActivity_to_bigPicFragment)
+            intent.putExtras(bundle)
+            activity?.startActivity(intent)
         }
 
         viewBinding.rvGirl.addOnScrollListener(object : LoadMoreOnScrollListener() {
