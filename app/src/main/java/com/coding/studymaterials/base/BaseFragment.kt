@@ -1,4 +1,4 @@
-package com.coding.girl.base
+package com.coding.studymaterials.base
 
 /**
  * @author: Coding.He
@@ -102,7 +102,6 @@ abstract class BaseFragment : Fragment() {
         Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show()
     }
 
-    abstract fun bindLayout(): Int
     abstract fun bindView(): View
     abstract fun initData(savedInstanceState: Bundle?)
     abstract fun initListener()

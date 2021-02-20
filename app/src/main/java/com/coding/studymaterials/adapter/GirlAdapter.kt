@@ -1,4 +1,4 @@
-package com.coding.girl.adapter
+package com.coding.studymaterials.adapter
 
 import android.content.Context
 import androidx.recyclerview.widget.GridLayoutManager
@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.coding.studymaterials.R
-import com.coding.studymaterials.bean.PageGirlBean
-import com.coding.studymaterials.adapter.RecyclerViewType
 import com.coding.studymaterials.base.BaseRecyclerAdapter
 import com.coding.studymaterials.base.RecyclerViewHolder
+import com.coding.studymaterials.bean.PageGirlBean
 
 
 /**

@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.coding.girl.adapter.GirlAdapter
-import com.coding.girl.base.BaseFragment
-import com.coding.girl.base.LoadMoreOnScrollListener
 import com.coding.studymaterials.R
 import com.coding.studymaterials.activity.BigPicActivity
+import com.coding.studymaterials.adapter.GirlAdapter
+import com.coding.studymaterials.base.BaseFragment
+import com.coding.studymaterials.base.LoadMoreOnScrollListener
 import com.coding.studymaterials.bean.PageGirlBean
 import com.coding.studymaterials.databinding.FragmentGirlBinding
 import retrofit2.Call
@@ -38,10 +38,6 @@ class GirlFragment : BaseFragment() {
 
     private val mDataList: ArrayList<PageGirlBean.DataBean> = arrayListOf()
     private lateinit var mAdapter: GirlAdapter
-    override fun bindLayout(): Int {
-        viewBinding = FragmentGirlBinding.inflate(layoutInflater)
-        return viewBinding.root.id
-    }
 
     override fun bindView(): View {
         viewBinding = FragmentGirlBinding.inflate(layoutInflater)

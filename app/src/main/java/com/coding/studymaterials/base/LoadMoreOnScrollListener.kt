@@ -1,4 +1,4 @@
-package com.coding.girl.base
+package com.coding.studymaterials.base
 
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager

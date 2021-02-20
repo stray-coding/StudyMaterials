@@ -2,18 +2,18 @@ package com.coding.studymaterials.activity
 
 import android.os.Bundle
 import android.view.View
-import com.coding.girl.base.BaseFragment
 import com.coding.studymaterials.R
 import com.coding.studymaterials.base.BaseActivity
+import com.coding.studymaterials.base.BaseFragment
 import com.coding.studymaterials.databinding.ActivityMainBinding
 import com.coding.studymaterials.fragment.AboutFragment
+import com.coding.studymaterials.fragment.ArticleFragment
 import com.coding.studymaterials.fragment.GirlFragment
-import com.coding.studymaterials.fragment.HomeFragment
 
 
 class MainActivity : BaseActivity() {
     private lateinit var viewBinding: ActivityMainBinding
-    private val homeFragment = HomeFragment()
+    private val homeFragment = ArticleFragment()
     private val girlFragment = GirlFragment()
     private val aboutFragment = AboutFragment()
 

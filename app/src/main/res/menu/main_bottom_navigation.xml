@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_home_normal"
         android:enabled="true"
         app:showAsAction="ifRoom"
-        android:title="@string/home"/>
+        android:title="@string/article" />
     <item
         android:id="@+id/bnv_girl"
         android:icon="@drawable/ic_girl_normal"
