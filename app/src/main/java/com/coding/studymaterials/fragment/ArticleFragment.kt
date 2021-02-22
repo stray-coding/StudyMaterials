@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @emil: stray-coding@foxmail.com
  * @des:
  */
-class GanHuoFragment : BaseFragment() {
+class ArticleFragment : BaseFragment() {
 
     private lateinit var viewBinding: FragmentGanhuoBinding
     private val tabs = arrayListOf("Android", "iOS", "Flutter", "前端", "后端", "APP")
@@ -35,7 +35,7 @@ class GanHuoFragment : BaseFragment() {
             }
 
             override fun createFragment(position: Int): Fragment {
-                return PaperFragment.newInstance(Constants.ganHuo, Constants.paperTypes[position])
+                return PaperFragment.newInstance(Constants.article, Constants.paperTypes[position])
             }
 
         }

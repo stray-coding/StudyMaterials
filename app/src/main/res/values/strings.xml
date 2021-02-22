@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">StudyMaterials</string>
+    <string name="app_name">干货集中营</string>
     <string name="article">article</string>
+    <string name="ganhuo">ganhuo</string>
     <string name="girl">girl</string>
     <string name="about">about</string>
     <string name="loading">loading</string>

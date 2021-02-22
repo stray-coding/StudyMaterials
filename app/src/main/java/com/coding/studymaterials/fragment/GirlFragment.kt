@@ -23,7 +23,7 @@ import retrofit2.http.Url
 /**
  * @author: Coding.He
  * @date: 2020/7/2
- * @emil: 229101253@qq.com
+ * @emil: stray-coding@foxmail.com
  * @des:
  */
 class GirlFragment : BaseFragment() {

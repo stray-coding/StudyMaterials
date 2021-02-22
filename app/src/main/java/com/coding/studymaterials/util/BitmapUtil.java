@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable;
 /**
  * @author: Coding.He
  * @date: 2020/6/19
- * @emil: 229101253@qq.com
+ * @emil: stray-coding@foxmail.com
  * @des:
  */
 public class BitmapUtil {

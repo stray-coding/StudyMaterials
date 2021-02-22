@@ -11,7 +11,7 @@ import com.coding.studymaterials.bean.PaperBean
 /**
  * @author: Coding.He
  * @date: 2020/6/19
- * @emil: 229101253@qq.com
+ * @emil: stray-coding@foxmail.com
  * @des:RecycleView的图片适配器
  */
 class PaperAdapter(context: Context, dataList: List<PaperBean.DataBean>) :

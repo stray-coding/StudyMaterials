@@ -2,22 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bnv_ganhuo"
-        android:icon="@drawable/ic_article"
+        android:id="@+id/bnv_article"
         android:enabled="true"
-        app:showAsAction="ifRoom"
-        android:title="@string/article" />
+        android:icon="@drawable/ic_article"
+        android:title="@string/article"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/bnv_ganhuo"
+        android:enabled="true"
+        android:icon="@drawable/ic_ganhuo"
+        android:title="@string/ganhuo"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/bnv_girl"
-        android:icon="@drawable/ic_girl"
         android:enabled="true"
-        app:showAsAction="ifRoom"
-        android:title="@string/girl"/>
+        android:icon="@drawable/ic_girl"
+        android:title="@string/girl"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/bnv_about"
-        android:icon="@drawable/ic_about"
         android:enabled="true"
-        app:showAsAction="ifRoom"
-        android:title="@string/about"/>
+        android:icon="@drawable/ic_about"
+        android:title="@string/about"
+        app:showAsAction="ifRoom" />
 
 </menu>

@@ -13,7 +13,7 @@ import androidx.annotation.RequiresApi;
 /**
  * Date 2018/12/27 23:08
  * author HDL
- * Mail 229101253@qq.com
+ * Mail stray-coding@foxmail.com
  */
 public class WindowInsetsFrameLayout extends FrameLayout {
     public WindowInsetsFrameLayout(Context context) {

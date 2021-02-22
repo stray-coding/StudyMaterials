@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 /**
  * @author: Coding.He
  * @date: 2020/7/8
- * @emil: 229101253@qq.com
+ * @emil: stray-coding@foxmail.com
  * @des:
  */
 abstract class LoadMoreOnScrollStateChangedListener : RecyclerView.OnScrollListener() {

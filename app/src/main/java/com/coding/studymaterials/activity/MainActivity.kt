@@ -8,6 +8,7 @@ import com.coding.studymaterials.R
 import com.coding.studymaterials.base.BaseActivity
 import com.coding.studymaterials.databinding.ActivityMainBinding
 import com.coding.studymaterials.fragment.AboutFragment
+import com.coding.studymaterials.fragment.ArticleFragment
 import com.coding.studymaterials.fragment.GanHuoFragment
 import com.coding.studymaterials.fragment.GirlFragment
 
@@ -15,6 +16,7 @@ import com.coding.studymaterials.fragment.GirlFragment
 class MainActivity : BaseActivity() {
     private lateinit var viewBinding: ActivityMainBinding
     private val fragments = arrayListOf(
+        ArticleFragment(),
         GanHuoFragment(),
         GirlFragment(),
         AboutFragment()
@@ -46,13 +48,16 @@ class MainActivity : BaseActivity() {
     override fun setListener() {
         viewBinding.bottomBar.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.bnv_ganhuo -> viewBinding.vpMain.currentItem = 0
-                R.id.bnv_girl -> viewBinding.vpMain.currentItem = 1
-                R.id.bnv_about -> viewBinding.vpMain.currentItem = 2
+                R.id.bnv_article -> viewBinding.vpMain.currentItem = 0
+                R.id.bnv_ganhuo -> viewBinding.vpMain.currentItem = 1
+                R.id.bnv_girl -> viewBinding.vpMain.currentItem = 2
+                R.id.bnv_about -> viewBinding.vpMain.currentItem = 3
                 else -> viewBinding.vpMain.currentItem = 0
             }
             true
         }
+        viewBinding.bottomBar.getChildAt(0).findViewById<View>(R.id.bnv_article)
+            .setOnLongClickListener { true }
         viewBinding.bottomBar.getChildAt(0).findViewById<View>(R.id.bnv_ganhuo)
             .setOnLongClickListener { true }
         viewBinding.bottomBar.getChildAt(0).findViewById<View>(R.id.bnv_girl)

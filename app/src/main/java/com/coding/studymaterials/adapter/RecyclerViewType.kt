@@ -3,7 +3,7 @@ package com.coding.studymaterials.adapter
 /**
  * @author: Coding.He
  * @date: 2020/7/8
- * @emil: 229101253@qq.com
+ * @emil: stray-coding@foxmail.com
  * @des:
  */
 

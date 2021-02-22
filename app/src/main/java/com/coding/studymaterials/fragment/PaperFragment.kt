@@ -1,9 +1,13 @@
 package com.coding.studymaterials.fragment
 
+import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.coding.studymaterials.Constants
 import com.coding.studymaterials.R
+import com.coding.studymaterials.activity.WebPaperActivity
 import com.coding.studymaterials.adapter.PaperAdapter
 import com.coding.studymaterials.base.BaseFragment
 import com.coding.studymaterials.base.LoadMoreOnScrollListener
@@ -20,21 +24,22 @@ import retrofit2.http.Url
 /**
  * @author: Coding.He
  * @date: 2021/2/20
- * @emil: 229101253@qq.com
+ * @emil: stray-coding@foxmail.com
  * @des:
  */
 class PaperFragment private constructor() : BaseFragment() {
     companion object {
-        fun newInstance(type: String): PaperFragment {
+        fun newInstance(category: String, type: String): PaperFragment {
             val fragment = PaperFragment()
+            fragment.category = category
             fragment.type = type
             return fragment
         }
     }
 
     /*获取Article中的文章*/
-    private val category = "GanHuo"
-    private var type: String = ""
+    private var category = Constants.article
+    private var type: String = Constants.paperTypes[0]
     private val count = 10
     private var page = 1
 
@@ -73,6 +78,14 @@ class PaperFragment private constructor() : BaseFragment() {
             }
         })
 
+        adapter.setOnItemClickListener { itemView, pos ->
+            val intent = Intent(activity, WebPaperActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("id", adapter.getItemData(pos)._id)
+            bundle.putString("title", adapter.getItemData(pos).title)
+            intent.putExtras(bundle)
+            activity?.startActivity(intent)
+        }
     }
 
     @Synchronized

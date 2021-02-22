@@ -13,7 +13,7 @@ import kotlin.math.min
 /**
  * @author: Coding.He
  * @date: 2020/6/19
- * @emil: 229101253@qq.com
+ * @emil: stray-coding@foxmail.com
  * @des:
  */
 class RoundImageView(ctx: Context, attr: AttributeSet?, defStyleAttr: Int) :

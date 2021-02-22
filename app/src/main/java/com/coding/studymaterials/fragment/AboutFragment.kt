@@ -1,5 +1,8 @@
 package com.coding.studymaterials.fragment
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
@@ -13,14 +16,20 @@ import com.coding.studymaterials.divider.RecycleViewDivider
 /**
  * @author: Coding.He
  * @date: 2020/7/2
- * @emil: 229101253@qq.com
+ * @emil: stray-coding@foxmail.com
  * @des:
  */
 class AboutFragment : BaseFragment() {
+    companion object {
+        private const val author = "stray-coding"
+        private const val mail = "stray-coding@foxmail.com"
+        private const val github = "https://github.com/stray-coding/StudyMaterials"
+    }
+
     private val lists = listOf(
-        "author：stray-coding",
-        "mail：stray-coding@foxmail.com",
-        "GitHub：https://github.com/stray-coding/StudyMaterials"
+        "author：<font color=#1296db>$author</font>",
+        "mail：<font color=#1296db> $mail </font>",
+        "github：<font color=#1296db> $github </font>"
     )
     private lateinit var adapter: AboutAdapter
     private lateinit var viewBinding: FragmentAboutBinding
@@ -43,14 +52,28 @@ class AboutFragment : BaseFragment() {
     override fun lazyLoadListener() {
         adapter.setOnItemClickListener { _, pos ->
             when (pos) {
+                0 -> {
+                    val cm =
+                        activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    cm.setPrimaryClip(ClipData.newPlainText("label", author))
+                }
+                1 -> {
+                    val cm =
+                        activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    cm.setPrimaryClip(ClipData.newPlainText("label", mail))
+                }
                 2 -> {
+                    val cm =
+                        activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    cm.setPrimaryClip(ClipData.newPlainText("label", github))
                     val urlIntent = Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("https://github.com/stray-coding/Girl")
+                        Uri.parse(github)
                     )
                     startActivity(urlIntent)
                 }
             }
+            showTip("已复制到剪贴板")
         }
     }
 }

@@ -24,7 +24,7 @@
             android:layout_height="30dp"
             android:layout_gravity="start|top"
             android:layout_margin="10dp"
-            app:srcCompat="@drawable/ic_left" />
+            app:srcCompat="@drawable/ic_back_white" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_download"
