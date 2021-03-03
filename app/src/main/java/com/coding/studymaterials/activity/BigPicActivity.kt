@@ -14,7 +14,6 @@ import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
 import com.coding.studymaterials.base.BaseActivity
 import com.coding.studymaterials.databinding.ActivityBigpicBinding
-import com.coding.studymaterials.util.BitmapUtil
 
 class BigPicActivity : BaseActivity() {
     companion object {
@@ -70,7 +69,7 @@ class BigPicActivity : BaseActivity() {
                     REQ_PERMISSION
                 )
             } else {
-                mBitmap = BitmapUtil.drawable2Bitmap(viewBinding.imgDetailGirl.drawable)
+                mBitmap = viewBinding.imgDetailGirl.drawable.toBitmap()
                 addBitmapToAlbum(mBitmap, mPicName)
             }
         }

@@ -41,13 +41,22 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     private var mContextView: View? = null
 
+    /**
+     * 当前activity是否支持滑动退出
+     * */
+    private var enableSlideBack = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         Log.d(TAG, "BaseActivity-->onCreate()")
         if (mContextView == null) mContextView = bindView()
         //LayoutInflater.from(this).inflate(bindLayout(), null)
         initDataBeforeSetContentView(savedInstanceState)
+        if (enableSlideBack) {
+            //SlidingBackLayout(this).bindActivity(this)
+        }
         if (mAllowFullScreen) {
             //隐藏action bar
             requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -204,6 +213,11 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     fun setSteepStatusBar(isSetStatusBar: Boolean) {
         this.isSetStatusBar = isSetStatusBar
+    }
+
+
+    fun setEnableSlideBack(enableSlideBack: Boolean) {
+        this.enableSlideBack = enableSlideBack
     }
 
     protected fun showTip(msg: String) {

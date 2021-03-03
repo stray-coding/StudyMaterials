@@ -82,7 +82,6 @@ class PaperFragment private constructor() : BaseFragment() {
             val intent = Intent(activity, WebPaperActivity::class.java)
             val bundle = Bundle()
             bundle.putString("id", adapter.getItemData(pos)._id)
-            bundle.putString("title", adapter.getItemData(pos).title)
             intent.putExtras(bundle)
             activity?.startActivity(intent)
         }

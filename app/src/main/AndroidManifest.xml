@@ -14,9 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyMaterials">
-        <activity android:name=".activity.WebPaperActivity"></activity>
-        <activity android:name=".activity.PaperDetailActivity" />
-        <activity android:name=".activity.BigPicActivity" />
+        <activity
+            android:name=".activity.WebPaperActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.PaperDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.BigPicActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
